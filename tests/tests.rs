@@ -18,5 +18,11 @@ speculate! {
                 assert_eq!(0, ::fuzzy::score(b"abc", b"xyz"));
             }
         }
+
+        it "..." {
+            assert_eq!(2, ::fuzzy::score(b"aaa", b"aa"));
+            assert_eq!(1, ::fuzzy::score(b"abc", b"a"));
+            assert_eq!(2, ::fuzzy::score(b"xyza", b"xa"));
+        }
     }
 }
