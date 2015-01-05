@@ -3,3 +3,6 @@
 name = "fuzzy"
 version = "0.0.1"
 authors = ["Utkarsh Kukreti <utkarshkukreti@gmail.com>"]
+
+[dependencies.speculate]
+git = "https://github.com/utkarshkukreti/speculate.rs"
