@@ -1,4 +1,6 @@
-pub fn score(haystack: &[u8], needle: &[u8]) -> u16 {
+pub type Score = u16;
+
+pub fn score(haystack: &[u8], needle: &[u8]) -> Score {
     if needle.len() == 0 {
         return 0
     }
