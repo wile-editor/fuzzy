@@ -2,11 +2,11 @@
 name = "fuzzy"
 version = "0.0.1"
 dependencies = [
- "speculate 0.0.1 (git+https://github.com/utkarshkukreti/speculate.rs)",
+ "speculate 0.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "speculate"
 version = "0.0.1"
-source = "git+https://github.com/utkarshkukreti/speculate.rs#db478e1359323a094f3698d30e04c6c68fd202c4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
