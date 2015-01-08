@@ -1,3 +1,4 @@
+#![allow(staged_experimental)]
 #![feature(plugin)]
 
 #[plugin]

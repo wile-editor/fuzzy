@@ -1,3 +1,4 @@
+#![allow(staged_experimental)]
 use std::ascii::AsciiExt;
 
 pub const BONUS_FIRST: Score = 2;
@@ -35,7 +36,7 @@ pub fn score(haystack: &[u8], needle: &[u8]) -> Score {
     let mut start_at = 0;
     for &n in needle.iter() {
         let mut found = false;
-        for i in range(start_at, haystack.len()) {
+        for i in start_at..haystack.len() {
             if n.eq_ignore_ascii_case(&haystack[i]) {
                 if !found {
                     start_at = i + 1;
