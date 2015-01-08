@@ -1,3 +1,5 @@
+use std::ascii::AsciiExt;
+
 pub const BONUS_FIRST: Score = 2;
 
 pub type Score = u16;
@@ -21,7 +23,7 @@ pub fn score(haystack: &[u8], needle: &[u8]) -> Score {
     for &n in needle.iter() {
         let mut found = false;
         for i in range(start_at, haystack.len()) {
-            if n == haystack[i] {
+            if n.eq_ignore_ascii_case(&haystack[i]) {
                 if !found {
                     start_at = i + 1;
                     found = true;
@@ -51,9 +53,9 @@ fn is_subsequence_of(smaller: &[u8], larger: &[u8]) -> bool {
     for s in smaller.iter() {
         loop {
             match larger.next() {
-                Some(l) if s == l => break,
-                Some(_)           => {},
-                None              => return false
+                Some(l) if s.eq_ignore_ascii_case(l) => break,
+                Some(_)                              => {},
+                None                                 => return false
             }
         }
     }

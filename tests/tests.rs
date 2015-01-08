@@ -35,6 +35,11 @@ speculate! {
             assert_eq!(4, ::fuzzy::score(b"xyza", b"xa"));
         }
 
+        it "is case-insensitive" {
+            assert!(::fuzzy::score(b"foo", b"F") > 0);
+            assert!(::fuzzy::score(b"Foo", b"f") > 0);
+        }
+
         context "bonus" {
             context "is given to" {
                 it "first char match" {
