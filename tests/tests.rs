@@ -67,5 +67,16 @@ speculate! {
             assert_eq!([b"foo", b"bar"],
                        ::fuzzy::sorted(&[b"bar", b"foo"], b"f"));
         }
+
+        context "score is same" {
+            it "ranks shorter haystack first" {
+                go! {
+                    [b"foo", b"foobar", b"baz", b"f"],
+                    b"f" => [b"f", b"foo", b"foobar"],
+                    b"b" => [b"baz", b"foobar"],
+                    b"a" => [b"baz", b"foobar"]
+                };
+            }
+        }
     }
 }

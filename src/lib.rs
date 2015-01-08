@@ -49,8 +49,15 @@ pub fn score(haystack: &[u8], needle: &[u8]) -> Score {
 
 pub fn sorted<'a, 'tmp>(haystacks: &'a [&[u8]],
                         needle: &'tmp [u8]) -> Vec<&'a [u8]> {
+    use std::cmp::Ordering::{Less, Equal, Greater};
     let mut ret = haystacks.iter().map(|&h| h).collect::<Vec<_>>();
-    ret.sort_by(|&a, &b| score(b, needle).cmp(&score(a, needle)));
+    ret.sort_by(|&a, &b| {
+        match score(a, needle).cmp(&score(b, needle)) {
+            Greater => Less,
+            Equal => a.len().cmp(&b.len()),
+            Less => Greater
+        }
+    });
     ret
 }
 
