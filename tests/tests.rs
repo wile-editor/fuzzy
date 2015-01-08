@@ -5,6 +5,16 @@ extern crate speculate;
 
 extern crate fuzzy;
 
+macro_rules! go {
+    ($haystacks:expr, $($needle:expr => $expected:expr),+) => {{
+        $(
+            let haystacks = &$haystacks;
+            let got = ::fuzzy::sorted(haystacks, $needle);
+            assert_eq!($expected, &got[..$expected.len()]);
+        )+
+    }}
+}
+
 speculate! {
     describe "score" {
         context "empty needle" {
@@ -28,8 +38,11 @@ speculate! {
         context "bonus" {
             context "is given to" {
                 it "first char match" {
-                    assert_eq!(3, ::fuzzy::score(b"bar", b"b"));
-                    assert_eq!(1, ::fuzzy::score(b"foobar", b"b"));
+                    go! {
+                        [b"barfoo", b"foobar"],
+                        b"b" => [b"barfoo", b"foobar"],
+                        b"f" => [b"foobar", b"barfoo"]
+                    };
                 }
             }
         }
