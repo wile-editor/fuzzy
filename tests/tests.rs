@@ -20,9 +20,18 @@ speculate! {
         }
 
         it "..." {
-            assert_eq!(2, ::fuzzy::score(b"aaa", b"aa"));
-            assert_eq!(1, ::fuzzy::score(b"abc", b"a"));
-            assert_eq!(2, ::fuzzy::score(b"xyza", b"xa"));
+            assert_eq!(4, ::fuzzy::score(b"aaa", b"aa"));
+            assert_eq!(3, ::fuzzy::score(b"abc", b"a"));
+            assert_eq!(4, ::fuzzy::score(b"xyza", b"xa"));
+        }
+
+        context "bonus" {
+            context "is given to" {
+                it "first char match" {
+                    assert_eq!(3, ::fuzzy::score(b"bar", b"b"));
+                    assert_eq!(1, ::fuzzy::score(b"foobar", b"b"));
+                }
+            }
         }
     }
 
