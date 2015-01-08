@@ -2,6 +2,7 @@ use std::ascii::AsciiExt;
 
 pub const BONUS_FIRST: Score = 2;
 pub const BONUS_UPPERCASE: Score = 1;
+pub const BONUS_AFTER_DELIM: Score = 3;
 
 pub type Score = u16;
 
@@ -20,10 +21,15 @@ pub fn score(haystack: &[u8], needle: &[u8]) -> Score {
     let mut bonuses = [0; 1024];
     bonuses[0] = BONUS_FIRST;
 
+    let mut next_bonus = 0;
     for (i, &h) in haystack.iter().enumerate() {
-        if b'A' <= h && h <= b'Z' {
-            bonuses[i] = BONUS_UPPERCASE;
-        }
+        let (now, next) = match h {
+            b'A' ... b'Z' => (next_bonus + BONUS_UPPERCASE, 0),
+            b'-' | b'.' | b'/' | b':' | b'_' => (next_bonus, BONUS_AFTER_DELIM),
+            _ => (next_bonus, 0)
+        };
+        bonuses[i] += now;
+        next_bonus = next;
     }
 
     let mut start_at = 0;

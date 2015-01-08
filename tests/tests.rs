@@ -58,6 +58,17 @@ speculate! {
                         b"ba" => [b"fooBAR", b"fOoBa"]
                     };
                 }
+
+                it "matches just after `-`, `.`, `/`, `:`, and `_`" {
+                    go! {
+                        [b"foo", b"f:oo", b"bar", b"b/a-r", b"ba_z", b"b.az"],
+                        b"f" => [b"foo", b"f:oo"],
+                        b"o" => [b"f:oo", b"foo"],
+                        b"a" => [b"b.az", b"b/a-r", b"bar", b"ba_z"],
+                        b"r" => [b"b/a-r", b"bar"],
+                        b"z" => [b"ba_z", b"b.az"]
+                    };
+                }
             }
         }
     }
