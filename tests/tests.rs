@@ -102,4 +102,39 @@ speculate! {
             }
         }
     }
+
+    describe "the real world" {
+        context "5286 files from rust repo" {
+            before {
+                let files = include_str!("fixtures/rust_repo_files.txt")
+                    .lines()
+                    .map(|s| s.as_bytes())
+                    .collect::<Vec<_>>();
+
+                assert_eq!(files.len(), 5286);
+            }
+
+            it "works for `abc`" {
+                go! {
+                    *files,
+                    b"abc" => [
+                        b"src/test/compile-fail/attr-bad-crate-attr.rc",
+                        b"src/test/run-pass/associated-types-binding-in-where-clause.rs",
+                        b"src/test/auxiliary/regions-bounded-method-type-parameters-cross-crate-lib.rs"
+                    ]
+                };
+            }
+
+            it "works for `htn`" {
+                go! {
+                    *files,
+                    b"htn" => [
+                        b"src/test/run-pass/hrtb-trait-object-paren-notation.rs",
+                        b"src/librustdoc/html/static/normalize.css",
+                        b"src/test/compile-fail/match-tag-nullary.rs"
+                    ]
+                };
+            }
+        }
+    }
 }
