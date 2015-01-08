@@ -3,6 +3,8 @@
 name = "fuzzy"
 version = "0.0.1"
 authors = ["Utkarsh Kukreti <utkarshkukreti@gmail.com>"]
+description = "Fast fuzzy string matching."
+license = "MIT"
 
 [dependencies]
 speculate = "0.0.1"
