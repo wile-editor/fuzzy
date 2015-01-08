@@ -10,8 +10,19 @@ macro_rules! go {
     ($haystacks:expr, $($needle:expr => $expected:expr),+) => {{
         $(
             let haystacks = &$haystacks;
+            let expected = $expected;
             let got = ::fuzzy::sorted(haystacks, $needle);
-            assert_eq!($expected, &got[..$expected.len()]);
+            let got = &got[..expected.len()];
+            if expected != got {
+                let expected = expected.iter()
+                    .map(|&b| String::from_utf8_lossy(b).into_owned())
+                    .collect::<Vec<_>>();
+                let got = got.iter()
+                    .map(|&b| String::from_utf8_lossy(b).into_owned())
+                    .collect::<Vec<_>>();
+
+                assert_eq!(expected, got);
+            }
         )+
     }}
 }
