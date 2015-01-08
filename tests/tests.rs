@@ -49,6 +49,15 @@ speculate! {
                         b"f" => [b"foobar", b"barfoo"]
                     };
                 }
+
+                it "uppercase char match" {
+                    go! {
+                        [b"foob", b"fOoBa", b"fooBAR"],
+                        b"o" => [b"fOoBa"],
+                        b"ob" => [b"fOoBa", b"fooBAR", b"foob"],
+                        b"ba" => [b"fooBAR", b"fOoBa"]
+                    };
+                }
             }
         }
     }

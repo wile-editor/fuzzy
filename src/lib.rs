@@ -1,6 +1,7 @@
 use std::ascii::AsciiExt;
 
 pub const BONUS_FIRST: Score = 2;
+pub const BONUS_UPPERCASE: Score = 1;
 
 pub type Score = u16;
 
@@ -18,6 +19,12 @@ pub fn score(haystack: &[u8], needle: &[u8]) -> Score {
 
     let mut bonuses = [0; 1024];
     bonuses[0] = BONUS_FIRST;
+
+    for (i, &h) in haystack.iter().enumerate() {
+        if b'A' <= h && h <= b'Z' {
+            bonuses[i] = BONUS_UPPERCASE;
+        }
+    }
 
     let mut start_at = 0;
     for &n in needle.iter() {
