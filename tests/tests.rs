@@ -25,4 +25,11 @@ speculate! {
             assert_eq!(2, ::fuzzy::score(b"xyza", b"xa"));
         }
     }
+
+    describe "sorted" {
+        it "works!" {
+            assert_eq!([b"foo", b"bar"],
+                       ::fuzzy::sorted(&[b"bar", b"foo"], b"f"));
+        }
+    }
 }

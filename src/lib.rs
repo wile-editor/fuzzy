@@ -33,6 +33,13 @@ pub fn score(haystack: &[u8], needle: &[u8]) -> Score {
     prev[haystack.len()]
 }
 
+pub fn sorted<'a, 'tmp>(haystacks: &'a [&[u8]],
+                        needle: &'tmp [u8]) -> Vec<&'a [u8]> {
+    let mut ret = haystacks.iter().map(|&h| h).collect::<Vec<_>>();
+    ret.sort_by(|&a, &b| score(b, needle).cmp(&score(a, needle)));
+    ret
+}
+
 fn is_subsequence_of(smaller: &[u8], larger: &[u8]) -> bool {
     let mut larger = larger.iter();
 
