@@ -16,8 +16,8 @@ pub fn score(haystack: &[u8], needle: &[u8]) -> Score {
         return 0
     }
 
-    let mut prev = [0; 1024];
-    let mut curr = [0; 1024];
+    let mut prev = &mut [0; 1024];
+    let mut curr = &mut [0; 1024];
 
     let mut bonuses = [0; 1024];
     bonuses[0] = BONUS_FIRST;
