@@ -1,4 +1,4 @@
-#![allow(staged_experimental)]
+#![allow(unstable)]
 use std::ascii::AsciiExt;
 
 pub const BONUS_FIRST: Score = 2;
